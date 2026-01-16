@@ -33,7 +33,7 @@ creating two different storage objects with two different type specialisations:
    ```
    + What are the reasons for using generics here?
    
-   To define the type of an object. Ensuring objects are of compatible type. 
+   To restrict the type of an object. Ensuring objects are of compatible type. 
    In this case objects are created from classes of BankAccount and String types.
    
    + What are the benefits?
@@ -67,12 +67,15 @@ Now replace:
    BankAccount account = new BankAccount(2025);
    ```
    + How does this affect the compilation process?
-   
-   It compiles because account is now of BankAccount type, so the method on bankAccountStorage now works.
+     
+    bankAccountStorage.setItem(account);
+this works because account is now of BankAccount type, so the method on bankAccountStorage now works.
    
    + What is the problem, if any?
+   + 
+   + account1.deposit(15); still doesn't work as account1 is of Object type. Deposit doesn't exist in Object class.
    
-     ** YOUR ANSWER HERE **
+    
    
 Now replace 
 
@@ -88,7 +91,7 @@ with
 
    + Does it still compile?
 
-   Yes, there's no difference.
+   It makes no difference. Compiler infers generic type from the left hand side.
 
 Finally, replace
 
@@ -104,11 +107,11 @@ with
 
    + Does it still compile? If not, explain why.
 
-     ** YOUR ANSWER HERE **
+   No compiler issues!
 
    + How would you fix the error?
 
-     ** YOUR ANSWER HERE **
+   ???
 
 
 2. In Java, arrays are **covariant**, which means that an array of type `T1[]` can be used in a context where 
