@@ -33,11 +33,12 @@ creating two different storage objects with two different type specialisations:
    ```
    + What are the reasons for using generics here?
    
-     ** YOUR ANSWER HERE **
+   To define the type of an object. Ensuring objects are of compatible type. 
+   In this case objects are created from classes of BankAccount and String types.
    
    + What are the benefits?
    
-     ** YOUR ANSWER HERE **
+   Type safety. Avoids type incompatibility. Don't need to cast objects to a different type.
 
 Add the following code to your `Example1` class:
 
@@ -52,7 +53,9 @@ Add the following code to your `Example1` class:
    
    + What is the cause of the problems reported by the compiler, if any?
    
-     ** YOUR ANSWER HERE **
+   The types are incompatible. In the first, account is of Object type. It needs to be of BankAccount type. Cast
+   account1 to BankAccount.
+    
 
 Now replace:
 
@@ -65,7 +68,7 @@ Now replace:
    ```
    + How does this affect the compilation process?
    
-     ** YOUR ANSWER HERE **
+   It compiles because account is now of BankAccount type, so the method on bankAccountStorage now works.
    
    + What is the problem, if any?
    
@@ -85,7 +88,7 @@ with
 
    + Does it still compile?
 
-     ** YOUR ANSWER HERE **
+   Yes, there's no difference.
 
 Finally, replace
 
