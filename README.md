@@ -135,7 +135,14 @@ with
 
 + Compile and run the code again. Does it still compile? Does it run? What is the output?
 
-  ** YOUR ANSWER HERE **
+It compiles (because arrays are covariant). It starts running but hits a run time error:
+
+in test - before storing into a
+Exception in thread "main" java.lang.ArrayStoreException: BankAccount
+at Example2.test(Example2.java:10)
+at Example2.main(Example2.java:5)
+
+You can't store a BankAccount object in a String array. 
 
 3. Generics in Java, in contrast, are **invariant**, which means that the type parameters need to match exactly:
 `C<T1>` is **not** a subtype of `C<T2>` when `T1` is a subtype of `T2` (unless, of course, `T1` is the same as `T2`).
@@ -156,17 +163,19 @@ with
 
 + Compile the code again. Does it still compile? Why not?
 
-  ** YOUR ANSWER HERE **
+ No. test method requires generic type <BankAccount>. The program attempts to pass in a generic type <String>.
+<BankAccount> and <String> are not compatible. Generics are invariant - type parameters have to match exactly which is 
+not the case here.
 
 4. Study the code in class `Example4`.
 
 + What is the type of variable `storage1`?
 
-  ** YOUR ANSWER HERE **
+  <BankAccount>. The compiler infers type from the right hand side.
 
 + Compile and run the code to make sure it can be executed successfully. What is the printed output?
 
-  ** YOUR ANSWER HERE **
+  Account 2024
 
 Add the following 3 lines to method `main`:
 
@@ -178,26 +187,34 @@ Add the following 3 lines to method `main`:
 
 + What is the type of variable `storage2`?
 
-  ** YOUR ANSWER HERE **
+  <SavingsAccount>
 
 + Compile the code. Does it compile? If not, what is the problem?
 
-  ** YOUR ANSWER HERE **
+  No. The method process only takes generic type <BankAccount>. You can't pass in <SavingsAccount>
 
 + Fix the compile-time error, without changing the contents of method `main` and without any code duplication. 
 In other words, assume that users of your 
 method `process` may want to invoke it with `Storage<BankAccount>`, `Storage<SavingsAccount>` or indeed with
 any `Storage<T>` for a subtype `T` of `BankAccount`.
 
+Change to upper bound wildcard:
+
+public static void process(Storage<? extends BankAccount> s)
+
+This uses a wildcard type. Takes anything that is a subclass of BankAccount.
+
+
+
 5. Study the code in class `Example5`.
 
 + What is the type of variable `storage1`? 
 
-  ** YOUR ANSWER HERE **
+  <SavingsAccount>
 
 + Compile and run the code to make sure it can be executed successfully. What is the printed output?
 
-  ** YOUR ANSWER HERE **
+ Storing 2024
 
 Add the following 4 lines to method `main`:
 
@@ -211,16 +228,20 @@ Add the following 4 lines to method `main`:
 
 + What is the type of variable `storage2`? What is the type of variable `storage3`?
 
-  ** YOUR ANSWER HERE **
+  storage2 is type <BankAccount>. storage3 is type <Object>
 
 + Compile the code. Does it compile? If not, what is the problem?
 
-  ** YOUR ANSWER HERE **
+  No, incompatible types. store takes <SavingsAccount> only not <BankAccount> or <Object>
 
 + Fix the compile-time error, without changing the contents of method `main` and without any code duplication.
   In other words, assume that users of your
   method `store` may want to invoke it with `Storage<SavingsAccount>` or with
   any `Storage<T>` for a supertype `T` of `SavingsAccount` (in particular, with `Storage<BankAccount>` and `Storage<Object>`).
+
+change to lower-bounded wildcard:
+
+public static void store(Storage<? super SavingsAccount> s, SavingsAccount acc)
 
 The last two exercises illustrate the PECS abbreviation: **P**roducer **e**xtends, **C**onsumer **s**uper.
 

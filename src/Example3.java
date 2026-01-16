@@ -1,8 +1,11 @@
 public class Example3 {
     public static void main(String[] args) {
-        Storage<BankAccount> storage = new Storage<>();
-        storage.setItem(new BankAccount(2024));
-        test(storage);
+//        Storage<BankAccount> storage = new Storage<>();
+//        storage.setItem(new BankAccount(2024));
+
+        Storage<String> storage = new Storage<>();
+        storage.setItem("Happy 2025!");
+//        test(storage);
     }
 
     public static void test(Storage<BankAccount> s) {

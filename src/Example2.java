@@ -1,7 +1,9 @@
 public class Example2 {
     public static void main(String[] args) {
-        BankAccount[] array = new BankAccount[2];
-        array[0] = new BankAccount(2024);
+//        BankAccount[] array = new BankAccount[2];
+//        array[0] = new BankAccount(2024);
+        String[] array = new String[2];
+        array[0] = "hi there";
         test(array);
     }
 
